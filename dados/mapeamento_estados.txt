@@ -1,0 +1,98 @@
+======================================================
+ MAPEAMENTO DOS ESTADOS - brasil.txt
+======================================================
+
+ Indices dos vertices (ordem alfabetica por sigla, sem DF):
+
+  0: AC  (Acre)
+  1: AL  (Alagoas)
+  2: AM  (Amazonas)
+  3: AP  (Amapa)
+  4: BA  (Bahia)
+  5: CE  (Ceara)
+  6: ES  (Espirito Santo)
+  7: GO  (Goias)
+  8: MA  (Maranhao)
+  9: MG  (Minas Gerais)
+ 10: MS  (Mato Grosso do Sul)
+ 11: MT  (Mato Grosso)
+ 12: PA  (Para)
+ 13: PB  (Paraiba)
+ 14: PE  (Pernambuco)
+ 15: PI  (Piaui)
+ 16: PR  (Parana)
+ 17: RJ  (Rio de Janeiro)
+ 18: RN  (Rio Grande do Norte)
+ 19: RO  (Rondonia)
+ 20: RR  (Roraima)
+ 21: RS  (Rio Grande do Sul)
+ 22: SC  (Santa Catarina)
+ 23: SE  (Sergipe)
+ 24: SP  (Sao Paulo)
+ 25: TO  (Tocantins)
+
+======================================================
+ FORMATO DO ARQUIVO brasil.txt
+======================================================
+
+ Linha 1:  26         -> numero de vertices (estados, sem DF)
+ Linha 2:  49         -> numero de arestas (fronteiras)
+ Demais:   v w        -> fronteira terrestre entre estado v e estado w
+
+======================================================
+ LISTA DE ARESTAS (fronteiras terrestres)
+======================================================
+
+  0  2   ->  AC - AM
+  0 19   ->  AC - RO
+  1  4   ->  AL - BA
+  1 14   ->  AL - PE
+  1 23   ->  AL - SE
+  2 11   ->  AM - MT
+  2 12   ->  AM - PA
+  2 19   ->  AM - RO
+  2 20   ->  AM - RR
+  3 12   ->  AP - PA
+  4  6   ->  BA - ES
+  4  7   ->  BA - GO
+  4  9   ->  BA - MG
+  4 14   ->  BA - PE
+  4 15   ->  BA - PI
+  4 23   ->  BA - SE
+  4 25   ->  BA - TO
+  5 13   ->  CE - PB
+  5 14   ->  CE - PE
+  5 15   ->  CE - PI
+  5 18   ->  CE - RN
+  6  9   ->  ES - MG
+  6 17   ->  ES - RJ
+  7  9   ->  GO - MG
+  7 10   ->  GO - MS
+  7 11   ->  GO - MT
+  7 25   ->  GO - TO
+  8 12   ->  MA - PA
+  8 15   ->  MA - PI
+  8 25   ->  MA - TO
+  9 10   ->  MG - MS
+  9 17   ->  MG - RJ
+  9 24   ->  MG - SP
+ 10 11   ->  MS - MT
+ 10 16   ->  MS - PR
+ 10 24   ->  MS - SP
+ 11 12   ->  MT - PA
+ 11 19   ->  MT - RO
+ 11 25   ->  MT - TO
+ 12 20   ->  PA - RR
+ 12 25   ->  PA - TO
+ 13 14   ->  PB - PE
+ 13 18   ->  PB - RN
+ 14 15   ->  PE - PI
+ 15 25   ->  PI - TO
+ 16 22   ->  PR - SC
+ 16 24   ->  PR - SP
+ 17 24   ->  RJ - SP
+ 21 22   ->  RS - SC
+
+======================================================
+ Total: 26 estados, 49 fronteiras terrestres
+======================================================
