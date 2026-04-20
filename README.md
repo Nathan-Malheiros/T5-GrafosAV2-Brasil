@@ -1,253 +1,168 @@
-# Projeto de Análise de Grafos - Circuito Euleriano
+# Trabalho Pratico 5 - Coloracao de Grafos com DSatur (Brasil)
 
-## 📋 Descrição do Projeto
+Projeto da disciplina de Grafos (UNIFOR) para modelar o mapa politico do Brasil como um grafo nao direcionado e aplicar a heuristica DSatur para coloracao de vertices.
 
-Este projeto implementa um analisador de grafos direcionados (dígrafos) que encontra circuitos eulerianos utilizando o **Algoritmo de Hierholzer**. O programa lê dados de entrada de um arquivo, constrói um dígrafo ponderado, verifica suas propriedades e calcula o custo total do circuito euleriano encontrado.
+## Visao Geral
 
-## 🎯 Objetivos
+Neste trabalho:
 
-- Construir e analisar dígrafos ponderados
-- Verificar se o grafo está balanceado (condição necessária para circuito euleriano)
-- Implementar o algoritmo de Hierholzer para encontrar circuitos eulerianos
-- Calcular o custo total do circuito percorrido
-- Gerar visualização gráfica do grafo usando Graphviz
+- cada vertice representa um estado;
+- cada aresta representa uma fronteira terrestre;
+- a coloracao e feita com o algoritmo DSatur;
+- o programa valida automaticamente se a coloracao final e correta;
+- uma imagem do grafo colorido e gerada em PNG.
 
-## 📁 Estrutura do Projeto
+O projeto possui duas execucoes:
 
+- versao oficial com 26 estados (sem DF): dados/brasil.txt + Main;
+- versao alternativa com 27 estados (com DF): dados/brasil_27.txt + Main27.
+
+## Resultado Obtido (execucao real)
+
+Compilacao e execucao foram testadas neste projeto:
+
+- Main (26 estados): 4 cores utilizadas, coloracao valida, gera grafo_colorido.png;
+- Main27 (27 estados): 4 cores utilizadas, coloracao valida, gera grafo_colorido_27.png.
+
+## Estrutura do Projeto
+
+```text
+T5/
+├── README.md
+├── T5.md
+├── executar.bat
+├── executar27.bat
+├── limpar.bat
+├── dados/
+│   ├── brasil.txt
+│   ├── brasil_27.txt
+│   └── mapeamento_estados.txt
+├── bin/
+├── lib/
+└── src/
+   ├── Main.java
+   ├── Main27.java
+   ├── GraphColoringDSatur.java
+   ├── GraphColoringVisualizer.java
+   ├── GraphColoringVisualizer27.java
+   ├── Graph.java
+   └── classes de apoio (Bag, Queue, Stack, StdDraw, In, etc.)
 ```
-T3/
-├── src/                          # Código fonte Java
-│   ├── Main.java                # Classe principal com lógica principal
-│   ├── Digraph.java             # Implementação de dígrafo
-│   ├── DirectedEdge.java        # Arestas direcionadas com pesos
-│   ├── DirectedEulerianCycle.java # Algoritmo de Hierholzer
-│   ├── BreadthFirstPaths.java   # Busca em largura
-│   ├── DigraphGenerator.java    # Gerador de dígrafos
-│   ├── Bag.java                 # Estrutura de dados Bag
-│   ├── Queue.java               # Fila
-│   ├── Stack.java               # Pilha
-│   ├── SET.java                 # Conjunto
-│   ├── In.java                  # Leitura de entrada
-│   ├── StdIn.java               # Entrada padrão
-│   ├── StdOut.java              # Saída padrão
-│   └── StdRandom.java           # Geração de números aleatórios
-├── bin/                         # Arquivos compilados (.class)
-├── lib/                         # Bibliotecas externas (se houver)
-├── dados/                       # Arquivos de entrada
-│   ├── entrada_eulerizada.txt   # Dados do grafo eulerizado
-│   └── entrada_original.txt     # Dados originais (backup)
-├── grafo_unifor.dot            # Arquivo Graphviz gerado
-├── resultado.pdf                # Visualização em PDF
-├── executar.bat                 # Script de execução
-└── README.md                    # Esta documentação
+
+## Requisitos
+
+- Java JDK 8+ instalado;
+- terminal no Windows (scripts .bat prontos);
+- opcional: adaptacao dos comandos para Linux/macOS.
+
+## Como Executar
+
+### Opcao 1 - Script pronto (26 estados)
+
+```bat
+executar.bat
 ```
 
-## 🔧 Pré-requisitos
+Esse script:
 
-### Sistema Operacional
-- Windows 10/11 (compatível com scripts .bat)
-- Linux/Mac (com ajustes no script)
+- limpa compilacoes antigas;
+- compila src/*.java em bin;
+- executa Main com dados/brasil.txt;
+- salva a imagem grafo_colorido.png.
 
-### Java Development Kit (JDK)
-- JDK 8 ou superior
-- Variável de ambiente `JAVA_HOME` configurada
+### Opcao 2 - Script pronto (27 estados)
 
-### Graphviz (para geração de PDF)
-- Instalar Graphviz: `choco install graphviz` (Windows) ou `sudo apt install graphviz` (Linux)
-- Comando `dot` deve estar no PATH
-
-## 📊 Formato dos Dados de Entrada
-
-O arquivo de entrada deve seguir o formato:
-
+```bat
+executar27.bat
 ```
-V E
-v1 w1 peso1
-v2 w2 peso2
+
+Esse script executa Main27 com dados/brasil_27.txt e salva grafo_colorido_27.png.
+
+### Opcao 3 - Execucao manual
+
+```bat
+javac -d bin -cp "bin;lib" src\*.java
+java -cp "bin;lib" Main dados/brasil.txt
+java -cp "bin;lib" Main27 dados/brasil_27.txt
+```
+
+## Formato dos Arquivos de Entrada
+
+Padrao algs4 para grafo nao direcionado:
+
+```text
+V
+E
+v1 w1
+v2 w2
 ...
-vE wE pesoE
 ```
 
 Onde:
-- `V`: Número de vértices (0 a V-1)
-- `E`: Número de arestas
-- `vi wi pesoi`: Aresta direcionada do vértice `vi` para `wi` com peso `pesoi`
 
-### Exemplo (`dados/entrada_eulerizada.txt`):
-```
-6 15
-0 2 20
-0 1 10
-4 0 12
-1 4 10
-1 3 50
-2 4 33
-2 3 20
-5 2 22
-3 4 5
-3 5 12
-4 5 1
-4 0 12
-5 2 22
-2 4 33
-4 1 10
-```
+- V = numero de vertices;
+- E = numero de arestas;
+- cada linha v w representa uma fronteira terrestre entre dois estados.
 
-## 🚀 Como Executar
+Arquivos usados no projeto:
 
-### Método 1: Script Automático (Recomendado)
-1. Abra o Prompt de Comando na pasta raiz do projeto
-2. Execute: `executar.bat`
-3. O script irá:
-   - Limpar arquivos antigos (.class, .dot, .pdf)
-   - Compilar todos os arquivos Java
-   - Executar o programa
-   - Gerar o PDF automaticamente
+- dados/brasil.txt: 26 vertices e 49 arestas;
+- dados/brasil_27.txt: 27 vertices e 51 arestas.
 
-### Método 2: Execução Manual
-```bash
-# 1. Limpar arquivos antigos
-del /Q bin\*.class
-del grafo_unifor.dot
-del resultado.pdf
+## O Que o Programa Exibe
 
-# 2. Compilar
-javac -d bin -cp bin;lib src\*.java
+Ao executar, o programa mostra:
 
-# 3. Executar
-java -cp bin;lib Main
+- lista de adjacencia completa do grafo;
+- ordem de coloracao dos vertices;
+- cor atribuida a cada estado;
+- total de cores utilizadas;
+- validacao da coloracao (garante cor[u] != cor[v] para cada aresta).
 
-# 4. Gerar PDF (opcional)
-dot -Tpdf grafo_unifor.dot -o resultado.pdf
-```
+## DSatur (Resumo Tecnico)
 
-## 📈 Algoritmo Implementado
+O DSatur e uma heuristica gulosa de coloracao. A cada iteracao:
 
-### 1. Construção do Dígrafo
-- Lê arquivo de entrada
-- Cria estrutura de adjacência usando `Digraph`
-- Armazena pesos das arestas em `List<DirectedEdge>`
+1. escolhe o vertice nao colorido com maior grau de saturacao (numero de cores distintas na vizinhanca);
+2. em empate, escolhe o de maior grau no grafo;
+3. atribui a menor cor disponivel que nao conflita com os vizinhos.
 
-### 2. Análise de Graus
-- Calcula grau de entrada (`indegree`) e saída (`outdegree`) para cada vértice
-- Verifica condição de balanceamento: `indegree(v) == outdegree(v)` para todo vértice
+No codigo, a implementacao principal esta em src/GraphColoringDSatur.java.
 
-### 3. Algoritmo de Hierholzer
-- Implementado na classe `DirectedEulerianCycle`
-- Usa busca em profundidade não-recursiva
-- Complexidade: O(E + V)
-- Encontra circuito que visita cada aresta exatamente uma vez
+## Mapeamento dos Estados
 
-### 4. Cálculo do Custo Total
-- Percorre o circuito encontrado
-- Soma os pesos das arestas visitadas
-- Trata arestas paralelas corretamente
+O mapeamento de indices para siglas esta documentado em dados/mapeamento_estados.txt.
 
-### 5. Geração de Visualização
-- Cria arquivo `.dot` compatível com Graphviz
-- Inclui pesos das arestas e circuito encontrado
-- Comando para PDF: `dot -Tpdf grafo_unifor.dot -o resultado.pdf`
+No codigo:
 
-## 📋 Saída do Programa
+- Main usa 26 estados (sem DF);
+- Main27 usa 27 estados (com DF no indice 6).
 
-### Exemplo de Execução:
-```
-=== Estrutura do Dígrafo Construído ===
-6 vertices, 15 edges
-0: 2 1
-1: 4 3
-2: 4 3
-3: 4 5
-4: 5 0 1
-5: 2
+## Arquivos de Saida Gerados
 
-=== Análise dos Vértices (Graus) ===
-Vértice 0: Entrada = 2, Saída = 2
-Vértice 1: Entrada = 2, Saída = 2
-Vértice 2: Entrada = 3, Saída = 3
-Vértice 3: Entrada = 2, Saída = 2
-Vértice 4: Entrada = 4, Saída = 4
-Vértice 5: Entrada = 2, Saída = 2
+- grafo_colorido.png (execucao Main);
+- grafo_colorido_27.png (execucao Main27).
 
-Confirmação: Grafo está balanceado.
+## Limpeza do Projeto
 
-=== Circuito Euleriano Encontrado ===
-0 -> 1 -> 3 -> 5 -> 2 -> 4 -> 1 -> 4 -> 0 -> 2 -> 3 -> 4 -> 5 -> 2 -> 4 -> 0
+Para remover classes e arquivos gerados:
 
--------------------------------------------
-CUSTO TOTAL DO CIRCUITO: 272,00
--------------------------------------------
-
-Arquivo 'grafo_unifor.dot' gerado.
-Use: dot -Tpdf grafo_unifor.dot -o resultado.pdf
+```bat
+limpar.bat
 ```
 
-## 🛠️ Classes e Estruturas
+## Checklist de Entrega
 
-### Classes Principais:
-- **`Main`**: Ponto de entrada, coordena todo o fluxo
-- **`Digraph`**: Representa dígrafo usando lista de adjacência
-- **`DirectedEdge`**: Aresta direcionada com peso
-- **`DirectedEulerianCycle`**: Implementa algoritmo de Hierholzer
+- modelagem correta das fronteiras terrestres;
+- implementacao do DSatur;
+- saida textual clara com validacao;
+- repositorio com instrucoes de execucao;
+- link do video no README.
 
-### Estruturas de Dados:
-- **`Bag`**: Coleção genérica para adjacências
-- **`Stack`**: Pilha para DFS
-- **`Queue`**: Fila para BFS
-- **`SET`**: Conjunto para verificações
+Link do video: COLOQUE_AQUI_O_LINK_DO_VIDEO
 
-## 🔍 Validações e Tratamento de Erros
+## Autor
 
-- **Arquivo não encontrado**: Verifica existência do arquivo de entrada
-- **Grafo não balanceado**: Alerta se graus de entrada ≠ saída
-- **Sem circuito euleriano**: Verifica conectividade do grafo
-- **Erros de compilação**: Script valida sucesso da compilação
-- **Erros de execução**: Captura exceções e mostra stack trace
-
-## 📊 Complexidade
-
-- **Tempo de Construção**: O(E)
-- **Verificação de Balanceamento**: O(V)
-- **Algoritmo de Hierholzer**: O(E + V)
-- **Cálculo de Custo**: O(E²) (devido à busca linear de pesos)
-- **Geração Graphviz**: O(E)
-
-## 🎨 Visualização
-
-O arquivo `grafo_unifor.dot` gerado pode ser convertido para PDF usando:
-```bash
-dot -Tpdf grafo_unifor.dot -o resultado.pdf
-```
-
-O grafo mostra:
-- Vértices numerados (0 a V-1)
-- Arestas direcionadas com pesos
-- Circuito euleriano destacado na legenda
-
-## 📝 Notas Técnicas
-
-- **Arestas Paralelas**: Suportadas pelo algoritmo
-- **Self-loops**: Permitidos na implementação
-- **Pesos**: Suportam valores double
-- **Vértices**: Numerados de 0 a V-1
-- **Encoding**: UTF-8 para suporte a caracteres especiais
-
-## 🤝 Contribuição
-
-Para contribuir com o projeto:
-1. Faça fork do repositório
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto é parte do Trabalho 3 da disciplina de Grafos - Universidade de Fortaleza.
-
----
-
-**Autor**: [Seu Nome]
-**Disciplina**: Grafos
-**Instituição**: Universidade de Fortaleza
-**Data**: Abril 2026
+- Disciplina: Grafos
+- Instituicao: Universidade de Fortaleza (UNIFOR)
+- Trabalho: AV2 - Atividade 5
