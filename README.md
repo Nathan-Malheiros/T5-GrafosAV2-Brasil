@@ -2,7 +2,7 @@
 
 Projeto da disciplina de Grafos (UNIFOR) para modelar o mapa politico do Brasil como um grafo nao direcionado e aplicar a heuristica DSatur para coloracao de vertices.
 
-Link do video: https://youtu.be/yTZ16tnNkiI 
+Link do video: https://youtu.be/K_EmePGqdvk 
 
 ## Visao Geral
 
